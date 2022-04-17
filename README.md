@@ -27,6 +27,8 @@ As this script runs, you'll see progress bars and reports detailing the script's
 - a library is not properly installed
 - lucas is stupid and forgot to account for something (in which case please lmk)
 
+![image](https://user-images.githubusercontent.com/78045025/163696099-a084eee7-f7eb-49c6-8f9b-1c972871b840.png)
+
 After your script has ran for some time, assuming it has made it all the way through, your directory should now look like such:
 
 ```
