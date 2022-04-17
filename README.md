@@ -32,19 +32,22 @@ As this script runs, you'll see progress bars and reports detailing the script's
 After your script has ran for some time, assuming it has made it all the way through, your directory should now look like such:
 
 ```
-STAT480/Project/
+./
 ├── archive/
-│   ├── gsod_all_years (make sure it is opened and not a .zip file)
+│   ├── gsod_all_years            (make sure it is opened and not a .zip file)
 │   └── ...
 ├── {start_year}_data/
-│   ├── gsod_all_years (make sure it is opened and not a .zip file)
+│   ├── {start_year}weatherdata.csv
+│   ├── {start_year}stations.txt
 │   └── ...
 ├── {start_year + 1}_data/
-│   ├── gsod_all_years (make sure it is opened and not a .zip file)
+│   ├── {start_year + 1}weatherdata.csv
+│   ├── {start_year + 1}stations.txt
 │   └── ...
 ├── ...
 ├── {end_year}_data/
-│   ├── gsod_all_years (make sure it is opened and not a .zip file)
+│   ├── {end_year}weatherdata.csv
+│   ├── {end_year}stations.txt
 │   └── ...
 ├── data_agg.py
 └── gzip_pal.py
