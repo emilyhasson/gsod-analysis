@@ -9,11 +9,12 @@ def gzip_to_dataframe(gz_file):
     # read in file as fixed-width file (FWF)
     df = pd.read_fwf(gzip.open(gz_file))
 
-    # locate and filter out coded missing values (e.g. 9999, 99.99, 99999.9)
-    df = df.astype('str').replace(to_replace=r'[9]+[.]*[9]*', value=np.nan, regex=True).dropna(axis=1, how='all')
-
     # focus on observations with recorded date
     df = df[df['YEARMODA'].notna()]
+
+    # locate and filter out coded missing values (e.g. 9999, 99.99, 99999.9)
+    df_without_year = df.drop(columns='YEARMODA').astype('str').replace(to_replace=r'[9]+[.]*[9]*', value=np.nan, regex=True).dropna(axis=1, how='all')
+    df = pd.concat([df_without_year, df['YEARMODA']], axis=1)
 
     # remove attributes with unnamed columns (these columns strictly count how many
     # observations were used when calculating the observed mean)
