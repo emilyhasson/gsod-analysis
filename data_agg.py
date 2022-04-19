@@ -1,5 +1,6 @@
 import os
 import tarfile
+import random
 
 import pandas as pd
 from alive_progress import alive_bar
@@ -14,26 +15,32 @@ def spew_out_year_directory(year):
         with tarfile.open(f'{gsod_dir}/{year_tar_dir}') as tar:
             tar.extractall(path=f'./{year}_data')
 
-def gather_year_directory_data(year):
+def gather_year_directory_data(year, n_samples):
     
     spew_out_year_directory(year)
     assert os.path.isdir(f'./{year}_data'), f'./{year}_data not valid directory'
-
+    
     df_dict = {}
-    with alive_bar(len(os.listdir(f'./{year}_data')[:100]), title=f'Working on {year}...') as bar:
-        for gz_file in os.listdir(f'./{year}_data')[:100]:
+    with alive_bar(n_samples, title=f'Working on {year}...') as bar:
+        dir_files = os.listdir(f'./{year}_data')
+        for sample in random.sample(population=range(len(dir_files)), k=n_samples):
             try:
+                gz_file = dir_files[sample]
                 df_dict[gz_file[:gz_file.find('-')]] = gp.gzip_to_dataframe(f'./{year}_data/{gz_file}')
                 bar()
             except:
-                continue    
+                continue
+
+    # for gz_file in os.listdir(f'./{year}_data'):
+    #     if os.path.exists(gz_file) and gz_file.endswith('.gz'):
+    #         os.remove(gz_file)
     
     return df_dict
 
-def write_to_csv(year):
+def write_to_csv(year, n_samples):
     
     # gather dataframes for given year
-    agg_df_dict = gather_year_directory_data(year)
+    agg_df_dict = gather_year_directory_data(year, n_samples)
     
     # write valid stations to text file for retrieval later on
     with open(f'./{year}_data/{year}stations.txt', 'w') as st_file:
@@ -49,7 +56,7 @@ def write_to_csv(year):
     
     # log results
     if os.path.isfile(f'./{year}_data/{year}stations.txt'):
-        print(f'>> Total stations: {total_stations}')
+        print(f'>> Total stations: {total_stations}/{n_samples}')
     if os.path.isfile(f'./{year}_data/{year}weatherdata.csv'):
         print(f'>> Success: {year}weatherdata.csv written to ./{year}_data/')
     else:
@@ -57,6 +64,9 @@ def write_to_csv(year):
 
 
 if __name__ == '__main__':
-    years = range(2000, 2020)
+    
+    years = range(1975, 2020)
+    n_samples = 8000
+    
     for year in years:
-        write_to_csv(year)
+        write_to_csv(year, n_samples)
