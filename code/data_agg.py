@@ -21,26 +21,30 @@ def gather_year_directory_data(year, n_samples):
     assert os.path.isdir(f'./{year}_data'), f'./{year}_data not valid directory'
     
     df_dict = {}
-    with alive_bar(n_samples, title=f'Working on {year}...') as bar:
-        dir_files = os.listdir(f'./{year}_data')
+    dir_files = os.listdir(f'./{year}_data')
+    
+    with alive_bar(n_samples, title=f'Working on {year} ...') as bar:
         for sample in random.sample(population=range(len(dir_files)), k=n_samples):
             try:
                 gz_file = dir_files[sample]
-                df_dict[gz_file[:gz_file.find('-')]] = gp.gzip_to_dataframe(f'./{year}_data/{gz_file}')
+                df_dict[gz_file[:gz_file.find('-')]] = gzip_to_dataframe(f'./{year}_data/{gz_file}')
+                os.remove(f'./{year}_data/{gz_file}')
                 bar()
             except:
                 continue
-
-    # for gz_file in os.listdir(f'./{year}_data'):
-    #     if os.path.exists(gz_file) and gz_file.endswith('.gz'):
-    #         os.remove(gz_file)
     
     return df_dict
+
 
 def write_to_csv(year, n_samples):
     
     # gather dataframes for given year
     agg_df_dict = gather_year_directory_data(year, n_samples)
+
+    # clean up directory
+    for file in os.listdir(f'./{year}_data'):
+      if file.endswith('.gz'):
+        os.remove(f'./{year}_data/{file}')
     
     # write valid stations to text file for retrieval later on
     with open(f'./{year}_data/{year}stations.txt', 'w') as st_file:
@@ -53,7 +57,7 @@ def write_to_csv(year, n_samples):
     pd.concat(
         agg_df_dict.values()
         ).to_csv(f'./{year}_data/{year}weatherdata.csv')
-    
+
     # log results
     if os.path.isfile(f'./{year}_data/{year}stations.txt'):
         print(f'>> Total stations: {total_stations}/{n_samples}')
@@ -61,6 +65,7 @@ def write_to_csv(year, n_samples):
         print(f'>> Success: {year}weatherdata.csv written to ./{year}_data/')
     else:
         print(f'!! Failure: {year}weatherdata.csv NOT written to ./{year}_data/')
+
 
 
 if __name__ == '__main__':
