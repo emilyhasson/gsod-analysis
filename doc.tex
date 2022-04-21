@@ -52,10 +52,14 @@ spatiotemporal data, Apache Spark, model fitting
 
 \section{Introduction}
 
- Each day, thousands of weather stations around the globe record and collect measurements of temperature, pressure, precipitation, and other factors involving the weather and climate. The National Oceanic and Atmospheric Administration is an American agency that forecasts weather and conducts scientific research about the climate and oceans. With history tracing back to the early 19th century, the NOAA has collected enormous amounts of atmospheric data since its inception. One of its largest collections of atmospheric data is the Global Surface Summary of the Day, which contains daily measurements dating back to 1929 and includes daily readings from over 9000 weather stations across the globe.
-
-Weather prediction is one of the most classic and well-studied types of large data analysis problems, and its continued importance in research today stems from both its complexity and its practical significance to people and the economy. We wish to explore this problem by fitting models to historical weather data, while also exploring issues involved with gathering and analyzing large collections of data. Our analysis will contain models for predicting the occurrence of tornadoes as well as more specific regional analyses of severe weather occurrences.
-
+\begin{itemize}
+  \item Describe the problem being solved and why it is important.
+  \item Discuss your motivation for pursuing this problem.
+  \item Clearly state what the features and model output will be.
+  \begin{itemize}
+    \item Note that these components can be reused from the project proposal paragraph.
+  \end{itemize}
+\end{itemize}
 
 \section{Related Work}
 
@@ -72,6 +76,8 @@ Three citations must originate from either a scholarly journal or are pre-prints
 
 \begin{itemize}
   \item What type of data is it (text/network/image/sound)? \\
+  
+  For our project, we will be working with structured weather data provided by various government agencies (NOAA, NCEI, etc.). Although the range of all possible years covers 1901 to 2019, we will focus on more recent data - strictly speaking, 1975 to 2019, both due to the increase in quality and quantity that each of the NOAA's global stations provide.
 
   \textbf{We are working primarily with weather data from various government agencies (NOAA, NCEI, etc). Most of the data is in the form of structured tables.} \\
 
@@ -80,15 +86,31 @@ Three citations must originate from either a scholarly journal or are pre-prints
   \textbf{The data gathered for this project is provided by the National Oceanic and Atmospheric Administration (NOAA)\footnote{This data is publicly available for anyone to use under the following terms provided by the Dataset Source}, a government agency that collects an array of information pertaining to daily weather forecasts, severe storm warnings, and more climate-related instances.} \\
 
   \item How large is the data's size when uncompressed?
-  \item How many records and features exist?
+  
+  
+  
+  \item How many records and features exist? \\
+  
+  Across the entire dataset, there exists N records and 23 features, where each observation represents the daily observation of certain variables (e.g., datetime of record, mean temperature (F), indicators for natural disasters) for a given weather station. \\
+  
   \item Did you have to apply any pre-processing to the data?
+  
+  Not yet...
+  
   \begin{itemize}
     \item List any preprocessing steps
     \item e.g. Normalization, Tokenization, ...
   \end{itemize}
   \item Were any special steps required?
+  
+    The archives of the data were stored in nested `.tar` folders, first segmented by year then segmented by station, and contained an array of non-ideal values that either contained two series of information in one series or were inconsistently alternating between missing value codes. By looping over each file, we extracted some series out into multiple series to discretize the data and preserve information and combatted inconsistent missing value codes using regular expression.
+  
   \item What kind of training/validation(dev)/test split is expected?
+  
   \item Show examples (if possible) of the data.
+  
+  An example of the final dataset can be found in the Appendix as Table 1.
+  
   \begin{itemize}
     \item For structured data, include the first 10 records.
     \item For text data, include a few unstructured entries.
@@ -115,8 +137,6 @@ Please include a reference to where the data set can be found. \textbf{This does
       \item Regression should state the RMSE, MSE, or MAE.
     \end{itemize}
     \item Graphs
-
-    \includegraphics[scale=0.5]{./temperature.png}
 
     \textbf{The temperature at this weather station appears to peak in July at around 80 degrees Fahrenheit and drop to less than 20 degrees Fahrenheit in February. This suggests that this weather station is most likely located in the northern hemisphere.} \\
 
@@ -145,6 +165,32 @@ At the end of the progress report, please include a brief 1 - 2 sentence write-u
 
 \section{Grading}
 
-The project will be graded according to a rubric. There will be no possibility for resubmission. To avoid grading surprises, please speak with a member of course staff about your draft during Office Hours prior to turning it in.
+The project will be graded according to a big big big rubric. There will be no possibility for resubmission. To avoid grading surprises, please speak with a member of course staff about your draft during Office Hours prior to turning it in.
+
+\section{References}
+
+\section{Appendix}
+
+\begin{table}[h!]
+\centering
+ \begin{tabular}{||c c c c c c||} 
+ \hline
+  Station& Datetime &Temperature & \dots & Precip Flag \\ [0.5ex] 
+ \hline\hline
+ 548360 & 19750101 & 35.7 & \dots & G \\
+ 548360 & 19750101 & 35.7 & \dots & G \\
+ 548360 & 19750101 & 35.7 & \dots & G \\
+ 548360 & 19750101 & 35.7 & \dots & G \\
+ \dots & \dots & \dots & \dots & \dots \\
+ 548360 & 19750101 & 35.7 & \dots & G \\
+ 548360 & 19750101 & 35.7 & \dots & G \\
+ 548360 & 19750101 & 35.7 & \dots & G \\
+ 548360 & 19750101 & 35.7 & \dots & G \\
+ 548360 & 19750101 & 35.7 & \dots & G \\[1ex] 
+ 
+ \hline
+ \end{tabular}
+ \caption{Sample of final dataset}
+\end{table}
 
 \end{document}
