@@ -59,5 +59,5 @@ Hype.
 
 ## Next Steps
 
-- Clear directory after done extracting sample because it will copy all `.gz` files to the new directory, hence doubling storage requirements.
-- Expand sample size to pump that storage requirement up.
+- [DONE] Clear directory after done extracting sample because it will copy all `.gz` files to the new directory, hence doubling storage requirements.
+- [DONE] Expand sample size to pump that storage requirement up
