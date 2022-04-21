@@ -75,42 +75,37 @@ Three citations must originate from either a scholarly journal or are pre-prints
 \section{Data}
 
 \begin{itemize}
-  \item What type of data is it (text/network/image/sound)? \\
-  
-  For our project, we will be working with structured weather data provided by various government agencies (NOAA, NCEI, etc.). Although the range of all possible years covers 1901 to 2019, we will focus on more recent data - strictly speaking, 1975 to 2019, both due to the increase in quality and quantity that each of the NOAA's global stations provide.
 
-  \textbf{We are working primarily with weather data from various government agencies (NOAA, NCEI, etc). Most of the data is in the form of structured tables.} \\
+  \item What type of data is it (text/network/image/sound)? \\
+
+  For our project, we will be working with structured weather data provided by various government agencies (NOAA, NCEI, etc.). Although the range of all possible years covers 1901 to 2019, we will focus on more recent data - strictly speaking, 1975 to 2019, both due to the increase in quality and quantity that each of the NOAA's global stations provide. \\
 
   \item Who collected the data? \\
 
-  \textbf{The data gathered for this project is provided by the National Oceanic and Atmospheric Administration (NOAA)\footnote{This data is publicly available for anyone to use under the following terms provided by the Dataset Source}, a government agency that collects an array of information pertaining to daily weather forecasts, severe storm warnings, and more climate-related instances.} \\
+  The data gathered for this project is provided by the National Oceanic and Atmospheric Administration (NOAA)\footnote{This data is publicly available for anyone to use under the following terms provided by the Dataset Source}, a government agency that collects an array of information pertaining to daily weather forecasts, severe storm warnings, and more climate-related instances. \\
 
-  \item How large is the data's size when uncompressed?
-  
-  
-  
+  \item How large is the data's size when uncompressed? \\
+
+  Billions and billions of bytes. (1.4 GB to be exact) \\
+
   \item How many records and features exist? \\
-  
-  Across the entire dataset, there exists N records and 23 features, where each observation represents the daily observation of certain variables (e.g., datetime of record, mean temperature (F), indicators for natural disasters) for a given weather station. \\
-  
+
+  Across the entire dataset, there exists millions records and 23 features, where each observation represents the daily observation of certain variables (e.g., datetime of record, mean temperature (F), indicators for natural disasters) for a given weather station. \\
+
   \item Did you have to apply any pre-processing to the data?
-  
-  Not yet...
-  
-  \begin{itemize}
-    \item List any preprocessing steps
-    \item e.g. Normalization, Tokenization, ...
-  \end{itemize}
-  \item Were any special steps required?
-  
-    The archives of the data were stored in nested `.tar` folders, first segmented by year then segmented by station, and contained an array of non-ideal values that either contained two series of information in one series or were inconsistently alternating between missing value codes. By looping over each file, we extracted some series out into multiple series to discretize the data and preserve information and combatted inconsistent missing value codes using regular expression.
-  
+
+  Not yet... \\
+
+  \item Were any special steps required? \\
+
+    The archives of the data were stored in nested `.tar' folders, first segmented by year then segmented by station, and contained an array of non-ideal values that either contained two series of information in one series or were inconsistently alternating between missing value codes. By looping over each file, we extracted some series out into multiple series to discretize the data and preserve information and combatted inconsistent missing value codes using regular expression. \\
+
   \item What kind of training/validation(dev)/test split is expected?
-  
-  \item Show examples (if possible) of the data.
-  
-  An example of the final dataset can be found in the Appendix as Table 1.
-  
+
+  \item Show examples (if possible) of the data. \\
+
+  An example of the final dataset can be found in the Appendix as Table 1. \\
+
   \begin{itemize}
     \item For structured data, include the first 10 records.
     \item For text data, include a few unstructured entries.
@@ -138,7 +133,7 @@ Please include a reference to where the data set can be found. \textbf{This does
     \end{itemize}
     \item Graphs
 
-    \textbf{The temperature at this weather station appears to peak in July at around 80 degrees Fahrenheit and drop to less than 20 degrees Fahrenheit in February. This suggests that this weather station is most likely located in the northern hemisphere.} \\
+    The temperature at this weather station appears to peak in July at around 80 degrees Fahrenheit and drop to less than 20 degrees Fahrenheit in February. This suggests that this weather station is most likely located in the northern hemisphere. \\
 
     \begin{itemize}
       \item Training and validation graphs based on the cost/loss function and evaluation metric (accuracy, F1, recall, RMSE, ...)
@@ -165,7 +160,7 @@ At the end of the progress report, please include a brief 1 - 2 sentence write-u
 
 \section{Grading}
 
-The project will be graded according to a big big big rubric. There will be no possibility for resubmission. To avoid grading surprises, please speak with a member of course staff about your draft during Office Hours prior to turning it in.
+The project will be graded according to a rubric. There will be no possibility for resubmission. To avoid grading surprises, please speak with a member of course staff about your draft during Office Hours prior to turning it in.
 
 \section{References}
 
@@ -173,9 +168,9 @@ The project will be graded according to a big big big rubric. There will be no p
 
 \begin{table}[h!]
 \centering
- \begin{tabular}{||c c c c c c||} 
+ \begin{tabular}{||c c c c c c||}
  \hline
-  Station& Datetime &Temperature & \dots & Precip Flag \\ [0.5ex] 
+  Station& Datetime &Temperature & \dots & Precip Flag \\ [0.5ex]
  \hline\hline
  548360 & 19750101 & 35.7 & \dots & G \\
  548360 & 19750101 & 35.7 & \dots & G \\
@@ -186,8 +181,8 @@ The project will be graded according to a big big big rubric. There will be no p
  548360 & 19750101 & 35.7 & \dots & G \\
  548360 & 19750101 & 35.7 & \dots & G \\
  548360 & 19750101 & 35.7 & \dots & G \\
- 548360 & 19750101 & 35.7 & \dots & G \\[1ex] 
- 
+ 548360 & 19750101 & 35.7 & \dots & G \\[1ex]
+
  \hline
  \end{tabular}
  \caption{Sample of final dataset}
