@@ -7,13 +7,11 @@
 \usepackage{graphicx}
 \usepackage{textcomp}
 \usepackage{xcolor}
-\usepackage{hyperref}
-\usepackage[T1]{fontenc}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \begin{document}
 
-\title{Challenges of Big Data: Predicting Occurrence of Storm Types per Historical Data (with \LaTeX)}
+\title{Challenges of Big Data: Predicting Occurrence of Storm Types per Historical Data}
 \author{
 \IEEEauthorblockN{Erens, Sam}
 \IEEEauthorblockA{
@@ -45,7 +43,9 @@
 \maketitle
 
 \begin{abstract}
-In this paper, we address the challenges in collecting, cleaning, and analyzing gigabytes of archived weather data.
+
+In this paper, we address the challenges in collecting, cleaning, and analyzing gigabytes of archived weather data. Using historical weather data provided by NOAA, we apply an array of statistical models to classify the occurrence of a specific weather event. Using popular software of the field, our findings contribute to an immensely extensive body of literature of weather classification techniques.
+
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -58,119 +58,78 @@ Emily's work goes here ...
 
 \section{Related Work}
 
-Weather forecasting has proven to be a difficult task, involving the ingestion of massive amounts of climate streaming data by models fit for big data with the purpose of summarizing observed or forecasting unobserved weather data. Numerous industries and professionals rely on the accuracy of these forecasts, stressing the importance of first accurately measuring various weather attributes across time.
+Weather forecasting has proven to be a difficult task, both in retrospective analysis and unobserved forecasting, due to the massive amounts of data required for an analysis and possible repercussions of an inaccurate forecast. As a result, researchers have drawn from other fields to help manage the ingestion of massive, multidimensional data [Sahasrabuddhe et al, 51; Mittal and Sangwan, 2019; Hassani and Silva, (53)], relying on clustering and dimensionality reduction techniques to derive patterns and remove noise or outliers among less-computationally expensive subsets of weather data. These results have allowed others to design and refine models that adapt to the changing climate [Vannitsem et al., 56] and are more robust and statistically significant when presented with the problem of frequent climate changes.
 
-\begin{itemize}
-  \item Discuss published work that relates to your project.
-  \item Emphasize how your approach will be similar or different from others.
-\end{itemize}
+However, even with the aforementioned advances in the field, weather forecasting remains a challenging issue that holds heavy implications in the case of an inaccurate or misleading forecast. Businesses and industries that predominantly operate outdoors rely on the accuracy of forecasts, both short-term and long-term, as it has a direct effect on their profits [Jain and Jain, 2017], allowing for these businesses to better manage costs of operation well before they could otherwise [Reddy and Babu, 2017].
 
-We will be looking for a \textbf{\underline{minimum of 6}} scholarly works cited.
-
-Three citations must originate from either a scholarly journal or are pre-prints on arXiv. Consider searching for articles using Google Scholar: \texttt{https://scholar.google.com/}. From there, click the “cite” button to automatically generate the appropriate citation from MLA, APA, or BibTex. That said, there is a preference for using BibLaTeX or natbib to avoid any bibliography formatting errors or mixing styles.
+Our analysis makes use of the previous findings, and we aim to add to this existing body of literature by demonstrating these difficulties in gathering weather data as well as composing a meaningful analysis from massive, multidimensional weather-related data.
 
 \section{Data}
-
+  
 For our project, we will be working with structured weather data provided by various weather-related government agencies\footnote{Archived dataset can be found on Kaggle: \textit{NOAA Global Surface Summary of the Day} (see References)}, including the National Oceanic and Atmospheric Administration (NOAA) and National Climate and Environmental Institution (NCEI), gathered by each of the internationally distributed sensors from the beginning of 1901 to the end of 2019. Each of these sensors report basic logging information (e.g., datetime and station identification) - which can be merged with provided text files in the same archive that provide geographical information (latitude, longitude, named location) of each station - as well as climate data on a daily basis (e.g., mean temperature (F), dew point (F), natural disaster indicators, etc.). Although the entire archive spans 120 years, we will strictly be focusing on data generated beyond 1975, the year the NOAA decided to increase the number of sensors they deploy. Altogether, this sample of the original archives contains 23GB of data comprised of NN million observations with 23 attributes each.
 
 Prior to conducting our analyses below, we did not perform any preprocessing to our data. However, this does not mean that the data was prepared ready for analysis. Rather, only after iterating over each year's series of `.gz` files were we able to prepare our dataset for analysis, including mapping a uniform null value to various missing value codes, expanding cluttered columns into multiple columns, and condensing each station's annual report to a single annual report. (Table 1 in the Appendix shows the first five and last five observations of the resulting dataset.) Given this, we will conduct k-fold cross validation on samples of our dataset below in our logistic regression models to allow hyperparameter selection to determine our best model.
 
 \section{Preliminary Technical Details and Results}
 
-\textbf{For points in this section, you must have \underline{at least one model fit} and described within the progress report.}
 
-\begin{itemize}
-  \item Describe in detail the proposed model. \\
+For the first phase of the project, we will fit a logistic regression model to the dataset to predict the presence or absence of a tornado at each weather station using most, if not all, of the other variables in the dataset as predictors. Currently, we have one model fit to the 1975 dataset that appears to be doing quite well; however, there is only one tornado recorded for 1975 so perhaps this is due to chance. We would like to expand our analysis to the years 1975 to 2019 and create separate logistic regression models for each of the four regions of the U.S. (Northeast, Midwest, West, and South).\footnote{https://www2.census.gov/geo/pdfs/maps-data/maps/reference/us\_regdiv.pdf} \\
 
-  For the first phase of the project, we will fit a logistic regression model to the dataset to predict the presence or absence of a tornado at each weather station using most, if not all, of the other variables in the dataset as predictors. Currently, we have one model fit to the 1975 dataset that appears to be doing quite well; however, there is only one tornado recorded for 1975 so perhaps this is due to chance. We would like to expand our analysis to the years 1975 to 2019 and create separate logistic regression models for each of the four regions of the U.S. (Northeast, Midwest, West, and South).\footnote{https://www2.census.gov/geo/pdfs/maps-data/maps/reference/us\_regdiv.pdf} \\
+The model is quite simple in principle. As we learned in class, logistic regression uses numeric predictor variables to predict the outcome of a zero-one binary response variable. In this case, the response variable is the presence or absence of a tornado, but logistic regression  models have also been used in the past to predict credit card default and detect malignancy in cancer patients. Things get a little bit more complicated when you are working with multiple predictor variables rather than a single predictor, but the underlying principle is the same.\footnote{https://en.wikipedia.org/wiki/Logistic\_regression} \\
 
-  \item Explain how it works in general (or specifically with your data). \\
+There were no tornados in our dataset and the model predicted no tornados. Therefore, the misclassification rate is zero.\footnote{https://github.com/emilyhasson/gsod-analysis/blob/main/gsod-analysis-part-1.ipynb} \\
 
-  The model is quite simple in principle. As we learned in class, logistic regression uses numeric predictor variables to predict the outcome of a zero-one binary response variable. In this case, the response variable is the presence or absence of a tornado, but logistic regression  models have also been used in the past to predict credit card default and detect malignancy in cancer patients. Things get a little bit more complicated when you are working with multiple predictor variables rather than a single predictor, but the underlying principle is the same.\footnote{https://en.wikipedia.org/wiki/Logistic\_regression} \\
+Going forward, we hope to have predictions for the entire period from 1975 to 2019 by Friday, April 29th. We will then focus on developing separate models for each geographic region of the United States. We hope to be finished with the modeling portion of the project no later than Friday, May 6th so that we can spend the final week analyzing the results and editing the video presentation. Our progress thus far can be found in our GitHub.\footnote{https://github.com/emilyhasson/gsod-analysis}\\
 
-  \item Show preliminary results in:
-  \begin{itemize}
-    \item Summary tables:
-    \begin{itemize}
-      \item Classification should highlight precision, recall, and accuracy metrics. \\
+\begin{thebibliography}{9}
 
-      There were no tornados in our dataset and the model predicted no tornados. Therefore, the misclassification rate is zero.\footnote{https://github.com/emilyhasson/gsod-analysis/blob/main/gsod-analysis-part-1.ipynb} \\
+\bibitem{article}
+Jain H, Jain R (2017). \textit{Big data in weather forecasting: applications and challenges.} In: 2017 International conference on big data analytics and computational intelligence (ICBDAC). pp 138–142
 
-      \item Regression should state the RMSE, MSE, or MAE.
-    \end{itemize}
-    \item Graphs
-    \begin{itemize}
-      \item Training and validation graphs based on the cost/loss function and evaluation metric (accuracy, F1, recall, RMSE, ...)
-    \end{itemize}
-  \end{itemize}
-  \item Provide a timeline of the project to date and what the future work will entail. \\
+\bibitem{article}
+Reddy PC, Babu AS (2017). \textit{Survey on weather prediction using big data analystics.} In: 2017 Second international conference on electrical, computer and communication technologies (ICECCT). pp 1–6
 
-  We hope to have predictions for the entire period from 1975 to 2019 by Friday, April 29th. We will then focus on developing separate models for each geographic region of the United States. We hope to be finished with the modeling portion of the project no later than Friday, May 6th so that we can spend the final week analyzing the results and editing the video presentation. \\
+\bibitem{article}
+Mittal S, Sangwan OP (2019). \textit{Big data analytics using data mining techniques: a survey.} In: Advanced informatics for computing research, Singapore. Springer Singapore, pp 264–273
 
-  \begin{itemize}
-    \item Summarize completed and future work by using a Gantt chart to break down the tasks and due dates.
-    \begin{itemize}
-      \item Break down each task by specifying \textbf{who} is \textbf{doing what} and \textbf{when} it will be done.
-      \item Avoid saying ``Everyone in the group'' is working on a single task.
-    \end{itemize}
-  \end{itemize}
-  \item Code
-  \begin{itemize}
-    \item Please provide code in a ZIP file or link to a GitHub repository. \textbf{Do \underline{not} submit your data set!}
-    \item \textbf{If you have a private GitHub repository, please add @coatless.}
+\bibitem{article}
+Sahasrabuddhe DV, Jamsandekar P (2015). \textit{Data structure for representation of big data of weather forecasting: a review.} Int J Comput Sci Trends Technol IJCST 3(6):48–56
 
-    https://github.com/emilyhasson/gsod-analysis
+\bibitem{article}
+Hassani H, Silva ES (2015). \textit{Forecasting with big data: a review.} Ann Data Sci 2(1):5–19
 
-  \end{itemize}
-\end{itemize}
+\bibitem{article}
+Vannitsem S et al (2021). \textit{Statistical postprocessing for weather forecasts: review, challenges, and avenues in a big data world.} Bull Am Meteorol Soc 102(3):E681–E699
+
+\end{thebibliography}
 
 \section{Contributions}
 
-At the end of the progress report, please include a brief 1 - 2 sentence write-up of what each group member contributed to this stage of the project. Award each member with a percentage between 0 - 100 such that the sum of all percentages across group members will be equal to 100. \textbf{This section does not count toward the page limit.} \\
-
-Lucas helped find and read in the data, even going so far as to write an automated Python script that pulls the data from the NOAA servers and then uploading it to Google Drive, our makeshift cloud storage solution. Lucas also created the initial \LaTeX\space file for the report. \\
-
-Sam made several contributions to the report, including the preliminary results section. He also began the initial modeling phase of the project by fitting a logistic regression model to the 1975 data. \\
-
-Emily wrote the introduction section of the report. She also helped find the dataset and created a shared GitHub repository, which you can access at the following URL: https://github.com/emilyhasson/gsod-analysis \\
-
-Sam: 33.3\%
-
-Lucas: 33.6\%
-
-Emily: 33.1\%
-
-\section{Grading}
-
-The project will be graded according to a rubric. There will be no possibility for resubmission. To avoid grading surprises, please speak with a member of course staff about your draft during Office Hours prior to turning it in.
-
-\section{References}
-
-https://www.census.gov/
-
-https://www.noaa.gov/
-
-https://en.wikipedia.org/
+\begin{itemize}
+\item \textbf{Emily}:
+\item \textbf{Lucas}: Designed scripts that gather annual data from archived .tar/.gz files, returning analysis-ready .csv files of each station in a given year. Wrote out Data, Related Work, and References section.
+\item \textbf{Sam}:
+\end{itemize}
 
 \section{Appendix}
 
 \begin{table}[h!]
 \centering
- \begin{tabular}{||c c c c c c||}
+ \begin{tabular}{||c c c c c c||} 
  \hline
-  Station& Datetime &Temperature & \dots & Precip Flag \\ [0.5ex]
+  Station& Datetime &Temperature & \dots & Precip Flag \\ [0.5ex] 
  \hline\hline
- 548360 & 19750101 & 35.7 & \dots & G \\
- 548360 & 19750101 & 35.7 & \dots & G \\
- 548360 & 19750101 & 35.7 & \dots & G \\
- 548360 & 19750101 & 35.7 & \dots & G \\
+ 725130 & 19750101 & 34.8 & \dots & G \\
+ 725130 & 19750102 & 31.4 & \dots & G \\
+ 725130 & 19750103 & 26.0 & \dots & G \\
+ 725130 & 19750104 & 34.8 & \dots & G \\
  \dots & \dots & \dots & \dots & \dots \\
- 548360 & 19750101 & 35.7 & \dots & G \\
- 548360 & 19750101 & 35.7 & \dots & G \\
- 548360 & 19750101 & 35.7 & \dots & G \\
- 548360 & 19750101 & 35.7 & \dots & G \\
- 548360 & 19750101 & 35.7 & \dots & G \\[1ex]
-
+ 702310 & 20191227 & -16.4 & \dots & I \\
+ 702310 & 20191228 & -5.7 & \dots & G \\
+ 702310 & 20191229 & 0.6 & \dots & G \\
+ 702310 & 20191230 & -20.8 & \dots & A \\
+ 702310 & 20191231 & -16.3 & \dots & A \\[1ex] 
+ 
  \hline
  \end{tabular}
  \caption{Sample of final dataset}
