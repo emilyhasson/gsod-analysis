@@ -36,7 +36,7 @@ def gather_year_directory_data(year, n_samples):
     return df_dict
 
 
-def write_to_csv(year, n_samples):
+def write_to_parquet(year, n_samples):
     
     # gather dataframes for given year
     agg_df_dict = gather_year_directory_data(year, n_samples)
@@ -56,22 +56,22 @@ def write_to_csv(year, n_samples):
     # write to concatenated dataframe to corresponding year folder
     pd.concat(
         agg_df_dict.values()
-        ).to_csv(f'./{year}_data/{year}weatherdata.csv')
+        ).to_parquet(f'./{year}_data/{year}weatherdata.parquet')
 
     # log results
     if os.path.isfile(f'./{year}_data/{year}stations.txt'):
         print(f'>> Total stations: {total_stations}/{n_samples}')
     if os.path.isfile(f'./{year}_data/{year}weatherdata.csv'):
-        print(f'>> Success: {year}weatherdata.csv written to ./{year}_data/')
+        print(f'>> Success: {year}weatherdata.parquet written to ./{year}_data/')
     else:
-        print(f'!! Failure: {year}weatherdata.csv NOT written to ./{year}_data/')
+        print(f'!! Failure: {year}weatherdata.parquet NOT written to ./{year}_data/')
 
 
 
 if __name__ == '__main__':
     
     years = range(1975, 2020)
-    n_samples = 8000
+    n_samples = 10000
     
     for year in years:
-        write_to_csv(year, n_samples)
+        write_to_parquet(year, n_samples)
