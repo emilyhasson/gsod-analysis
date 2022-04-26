@@ -65,7 +65,7 @@ However, even with the aforementioned advances in the field, weather forecasting
 Our analysis makes use of the previous findings, and we aim to add to this existing body of literature by demonstrating these difficulties in gathering weather data as well as composing a meaningful analysis from massive, multidimensional weather-related data.
 
 \section{Data}
-  
+
 For our project, we will be working with structured weather data provided by various weather-related government agencies\footnote{Archived dataset can be found on Kaggle: \textit{NOAA Global Surface Summary of the Day} (see References)}, including the National Oceanic and Atmospheric Administration (NOAA) and National Climate and Environmental Institution (NCEI), gathered by each of the internationally distributed sensors from the beginning of 1901 to the end of 2019. Each of these sensors report basic logging information (e.g., datetime and station identification) - which can be merged with provided text files in the same archive that provide geographical information (latitude, longitude, named location) of each station - as well as climate data on a daily basis (e.g., mean temperature (F), dew point (F), natural disaster indicators, etc.). Although the entire archive spans 120 years, we will strictly be focusing on data generated beyond 1975, the year the NOAA decided to increase the number of sensors they deploy. Altogether, this sample of the original archives contains 23GB of data comprised of NN million observations with 23 attributes each.
 
 Prior to conducting our analyses below, we did not perform any preprocessing to our data. However, this does not mean that the data was prepared ready for analysis. Rather, only after iterating over each year's series of `.gz` files were we able to prepare our dataset for analysis, including mapping a uniform null value to various missing value codes, expanding cluttered columns into multiple columns, and condensing each station's annual report to a single annual report. (Table 1 in the Appendix shows the first five and last five observations of the resulting dataset.) Given this, we will conduct k-fold cross validation on samples of our dataset below in our logistic regression models to allow hyperparameter selection to determine our best model.
@@ -115,9 +115,9 @@ Vannitsem S et al (2021). \textit{Statistical postprocessing for weather forecas
 
 \begin{table}[h!]
 \centering
- \begin{tabular}{||c c c c c c||} 
+ \begin{tabular}{||c c c c c c||}
  \hline
-  Station& Datetime &Temperature & \dots & Precip Flag \\ [0.5ex] 
+  Station& Datetime &Temperature & \dots & Precip Flag \\ [0.5ex]
  \hline\hline
  725130 & 19750101 & 34.8 & \dots & G \\
  725130 & 19750102 & 31.4 & \dots & G \\
@@ -128,8 +128,8 @@ Vannitsem S et al (2021). \textit{Statistical postprocessing for weather forecas
  702310 & 20191228 & -5.7 & \dots & G \\
  702310 & 20191229 & 0.6 & \dots & G \\
  702310 & 20191230 & -20.8 & \dots & A \\
- 702310 & 20191231 & -16.3 & \dots & A \\[1ex] 
- 
+ 702310 & 20191231 & -16.3 & \dots & A \\[1ex]
+
  \hline
  \end{tabular}
  \caption{Sample of final dataset}
