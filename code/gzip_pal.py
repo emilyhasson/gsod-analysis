@@ -16,7 +16,7 @@ def gzip_to_dataframe(gz_file):
         df_without_year = df.drop(columns='YEARMODA').astype('str'
         ).replace(to_replace=r'[9]+[.]+[9]*', value=np.nan, regex=True
         ).dropna(axis=1, how='all')
-        
+
         df = pd.concat([df_without_year, df['YEARMODA']], axis=1)
 
         # remove attributes with unnamed columns (these columns strictly count how many
@@ -37,13 +37,13 @@ def gzip_to_dataframe(gz_file):
         # extract precipitation values and flags and store in respective columns
         df[['precip_in', 'precip_flag']] = df['PRCP'].str.extract('(?P<precip_in>[\d.]{4})(?P<precip_flag>[A-Z]{1})'
         ).fillna({'precip_in':0, 'flag':np.nan})
-        
+
         df['precip_in'] = df['precip_in'].astype('float64')
 
         # replace pointless flags fro temperature columns
         df['max_temp_frnht'] = df['MAX'].apply(lambda x: str(x).replace('*', '')).astype('float64')
         df['min_temp_frnht'] = df['MIN'].apply(lambda x: str(x).replace('*', '')).astype('float64')
-        
+
         # remove columns we just extracted data from and rename columns
         df.drop(columns=['FRSHTT', 'YEARMODA', 'MAX', 'MIN', 'PRCP', 'WBAN'], inplace=True)
         df.rename(columns={
@@ -64,6 +64,6 @@ def gzip_to_dataframe(gz_file):
         mid_cols = list(df.columns[~df.columns.isin(beg_cols + end_cols)])
 
         return df#[beg_cols + mid_cols + end_cols]
-    
+
     except:
       pass

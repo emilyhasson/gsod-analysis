@@ -16,13 +16,13 @@ def spew_out_year_directory(year):
             tar.extractall(path=f'./{year}_data')
 
 def gather_year_directory_data(year, n_samples):
-    
+
     spew_out_year_directory(year)
     assert os.path.isdir(f'./{year}_data'), f'./{year}_data not valid directory'
-    
+
     df_dict = {}
     dir_files = os.listdir(f'./{year}_data')
-    
+
     with alive_bar(n_samples, title=f'Working on {year} ...') as bar:
         for sample in random.sample(population=range(len(dir_files)), k=n_samples):
             try:
@@ -32,12 +32,12 @@ def gather_year_directory_data(year, n_samples):
                 bar()
             except:
                 continue
-    
+
     return df_dict
 
 
 def write_to_parquet(year, n_samples):
-    
+
     # gather dataframes for given year
     agg_df_dict = gather_year_directory_data(year, n_samples)
 
@@ -45,14 +45,14 @@ def write_to_parquet(year, n_samples):
     for file in os.listdir(f'./{year}_data'):
       if file.endswith('.gz'):
         os.remove(f'./{year}_data/{file}')
-    
+
     # write valid stations to text file for retrieval later on
     with open(f'./{year}_data/{year}stations.txt', 'w') as st_file:
         total_stations = 0
         for st in agg_df_dict.keys():
             total_stations += 1
             st_file.write(st + '\n')
-    
+
     # write to concatenated dataframe to corresponding year folder
     pd.concat(
         agg_df_dict.values()
@@ -69,9 +69,9 @@ def write_to_parquet(year, n_samples):
 
 
 if __name__ == '__main__':
-    
+
     years = range(1975, 2020)
     n_samples = 10000
-    
+
     for year in years:
         write_to_parquet(year, n_samples)
