@@ -80,11 +80,13 @@ Prior to conducting our analyses below, we did not perform any preprocessing to 
 
 \section{Exploratory Data Analysis}
 
-Emily's work goes here ...
+After cleaning and restructuring the data to make it more useful for our purposes, we began to explore our data through analysis of summary statistics and visualizations. Given the large number of variables included in the dataset, we generated histograms to evaluate the distribution of each variable (Figure 4). Some notable findings from this are that some of the measurements have unexpectedly high counts of '0' due to incomplete data, which will need to be accounted for later. Additionally, many of the binary variables (such as rain, snow, tornado, etc) are almost entirely 0s, perhaps due to incomplete entries or simply due to these weather events being less frequent. This will affect our logistic regression models since ideally we would want more evenly distributed response variables.
+
+It was also relevant to our study to explore the consistency of measurements between years, because this dataset contains information compiled over many decades. Since the dataset contains just one measurement per station per day, but over an extensive period of time, comparisons of yearly averages are perhaps most fitting for understanding its use. Indeed, records from more recent years (2000 onward) have a roughly evenly distributed number of entries each (Figure 5). We can also check precipiation trends between years. Interestingly, records of thunderstorms and tornadoes seem to peak in 2004 and then drop off for the 2005-2008 period, which seem to have been much drier months (Figures 6 and 7). We speculate that perhaps this is due to a strong El Niño seasonal shift. Another interesting visualization of a heat map displays mean temperatures across different regions of the United States (Figure 1). 
 
 \section{Methods}
 
-After cleaning the dataset and performing some exploratory data analysis, we were ready to begin the modeling portion of the project. As students of the University of Illinois, we are naturally curious about tornados. Illinois is prone to tornados, with an average of 50 tornados touching down in the state every year. Tornados can strike during any time of the year, but they are most common in the spring, particularly during the months of April, May, and June. While few deaths are attributed to tornados compared to, say, motor vehicle accidents or homicides, tornados pose a significant threat to property. In 2017 alone, the damage caused by tornados in Illinois was estimated to be on the order of \$12 million. [9]
+After cleaning the dataset and performing some exploratory data analysis, we were ready to begin the modeling portion of the project. As students of the University of Illinois, we are naturally curious about tornados. Illinois is prone to tornados, with an average of 50 tornados touching down in the state every year. Tornadoes can strike during any time of the year, but they are most common in the spring, particularly during the months of April, May, and June. While few deaths are attributed to tornados compared to, say, motor vehicle accidents or homicides, tornados pose a significant threat to property. In 2017 alone, the damage caused by tornados in Illinois was estimated to be on the order of \$12 million. [9]
 
 In our dataset, tornados are recorded a binary variable, with 1 indicating that a tornado was detected by a particular weather station and 0 indicating that no tornado was detected. Therefore, logistic regression seemed a natural choice since it does not require any transformation of the response variable. Since tornados are primarily an American phenomenon, we restricted our attention to the United States only. First, we fit a logistic regression model to the entire dataset, using the tornado variable as the response and all other numeric variables (temperature, dewpoint, windspeed, etc.) as predictors. Next, we fit a separate logistic regression model to each of the four regions of the United States as defined by the U.S. Census Bureau. [10] Finally, we fit a separate logistic regression model to each of the 1416 weather stations located within the United States. [11]
 
@@ -204,5 +206,21 @@ Figure 2. Grouped boxplot of standardized cluster attributes.
 Figure 3. Mapping of k-means predicted clusters to United States.
 
 \includegraphics[width=8.5cm, height=6cm]{cluster_on_map.jpg}
+
+Figure 4. Histograms displaying the distribution of various features included in the dataset.
+
+\includegraphics[width=8.5cm, height=6cm]{gsod-feature-distributions.png}
+
+Figure 5. Pie chart displaying distribution of entries between years.
+
+\includegraphics[width=8.5cm, height=6cm]{pie-chart.png}
+
+Figure 6. Bar chart displaying average thunderstorm counts per year.
+
+\includegraphics[width=8.5cm, height=6cm]{thunder.png}
+
+Figure 7. Bar chart displaying average tornado counts per year.
+
+\includegraphics[width=8.5cm, height=6cm]{tornadoes.png}
 
 \end{document}
