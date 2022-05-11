@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.5.8)  10 MAY 2022 19:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.5.8)  10 MAY 2022 19:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -636,12 +636,12 @@ LaTeX Font Info:    Try loading font information for TS1+ptm on input line 87.
 (/usr/local/texlive/2019/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 ) [2]
-<silhouette_scores.jpg, id=69, 402.50375pt x 277.035pt>
+<silhouette_scores.jpg, id=73, 402.50375pt x 277.035pt>
 File: silhouette_scores.jpg Graphic file (type jpg)
 <use silhouette_scores.jpg>
 Package pdftex.def Info: silhouette_scores.jpg  used on input line 192.
 (pdftex.def)             Requested size: 241.84804pt x 170.71579pt.
-<attribute_distribution.jpg, id=70, 472.76625pt x 284.06125pt>
+<attribute_distribution.jpg, id=74, 472.76625pt x 284.06125pt>
 File: attribute_distribution.jpg Graphic file (type jpg)
 <use attribute_distribution.jpg>
 Package pdftex.def Info: attribute_distribution.jpg  used on input line 196.
@@ -724,7 +724,7 @@ en already used, duplicate ignored
 l.198 F
        igure 3. Mapping of k-means predicted clusters to United States. <./silh
 ouette_scores.jpg>]
-<cluster_on_map.jpg, id=82, 392.46625pt x 181.67876pt>
+<cluster_on_map.jpg, id=84, 392.46625pt x 181.67876pt>
 File: cluster_on_map.jpg Graphic file (type jpg)
 <use cluster_on_map.jpg>
 Package pdftex.def Info: cluster_on_map.jpg  used on input line 200.
@@ -749,15 +749,9 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 202.
  (./doc.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 202.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 202.
+Package rerunfilecheck Info: File `doc.out' has not changed.
+(rerunfilecheck)             Checksum: BA25855A01CCF8D7E30DBA45F204B0A0;600.
 
-
-Package rerunfilecheck Warning: File `doc.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `doc.out':
-(rerunfilecheck)             Before: 70A9E154FB6680BFAA874E2AE99BA27D;544
-(rerunfilecheck)             After:  BA25855A01CCF8D7E30DBA45F204B0A0;600.
 
 LaTeX Warning: There were multiply-defined labels.
 
@@ -765,26 +759,23 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 202.
  ) 
 Here is how much of TeX's memory you used:
  7918 strings out of 492616
- 117339 string characters out of 6129482
+ 117338 string characters out of 6129482
  218865 words of memory out of 5000000
- 11726 multiletter control sequences out of 15000+600000
+ 11727 multiletter control sequences out of 15000+600000
  43026 words of font info for 88 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  28i,8n,35p,1192b,315s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{subsection.9.1} has been referenced but does not 
-exist, replaced by a fixed one
-
-{/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/tex
-live/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texl
-ive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texliv
-e/2019/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2019/tex
-mf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2019/texmf-dist/f
-onts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1
-/urw/times/utmri8a.pfb>
-Output written on doc.pdf (4 pages, 202890 bytes).
+{/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
+exlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/te
+xlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texl
+ive/2019/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2019/t
+exmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2019/texmf-dist
+/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/typ
+e1/urw/times/utmri8a.pfb>
+Output written on doc.pdf (4 pages, 203111 bytes).
 PDF statistics:
- 115 PDF objects out of 1000 (max. 8388607)
- 99 compressed objects within 1 object stream
- 20 named destinations out of 1000 (max. 500000)
- 104 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 118 PDF objects out of 1000 (max. 8388607)
+ 101 compressed objects within 2 object streams
+ 19 named destinations out of 1000 (max. 500000)
+ 112 words of extra memory for PDF output out of 10000 (max. 10000000)
 
